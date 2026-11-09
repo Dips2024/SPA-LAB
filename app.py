@@ -23,7 +23,7 @@ from dsp import (
 )
 
 
-st.set_page_config(page_title="Audio Noise Lab | EC6675", page_icon="🎛️", layout="wide")
+st.set_page_config(page_title="Audio Noise Lab", page_icon="🎛️", layout="wide")
 st.markdown(
     """
     <style>
