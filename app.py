@@ -30,15 +30,14 @@ st.markdown(
       .block-container {max-width: 1180px; padding-top: 4rem;}
       h1,h2,h3 {color: #163344;}
       div[data-testid="stMetric"] {background: #eaf3f4; border-radius: 12px; padding: 12px 16px;}
-      .hero {background:linear-gradient(115deg,#163344,#0d676c);color:white;padding:1.25rem 1.75rem 1.4rem;border-radius:18px;margin-bottom:1rem;}
-      .hero-kicker {display:block;color:#a7f3d0;font-weight:700;letter-spacing:.1em;font-size:.75rem;line-height:1.5;margin-bottom:.25rem;}
+      .hero {background:linear-gradient(115deg,#163344,#0d676c);color:white;padding:1.55rem 1.75rem;border-radius:18px;margin-bottom:1rem;}
       .hero-title {display:block;color:#fff;font-size:2rem;font-weight:750;line-height:1.2;}
       @media (max-width: 700px) {.block-container {padding-top:4.5rem;} .hero {padding:1rem 1.2rem;} .hero-title {font-size:1.6rem;}}
       .source-card {background:#fff;border:2px solid #0d9488;border-radius:12px;padding:.7rem 1rem;margin:.4rem 0 1rem;color:#163344;}
       .source-card span {font-size:.72rem;font-weight:700;letter-spacing:.08em;color:#0d676c;}
       .source-card strong {display:block;font-size:1.12rem;overflow-wrap:anywhere;}
     </style>
-    <div class="hero"><div class="hero-kicker">NIT ROURKELA · EC6675 · MODULES 2 + 3</div><div class="hero-title">Audio Noise Lab</div></div>
+    <div class="hero"><div class="hero-title">Audio Noise Lab</div></div>
     """,
     unsafe_allow_html=True,
 )
