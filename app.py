@@ -34,9 +34,10 @@ st.markdown(
       [data-testid="stSidebar"] {background: #ffffff; border-right: 1px solid #e5ecee;}
       [data-testid="stSidebar"] h2 {font-size: 1.15rem;}
       [data-testid="stSidebar"] [data-testid="stVerticalBlock"] {gap: .7rem;}
-      [data-testid="stMetric"] {background: #fff; border: 1px solid #e1e9eb; border-radius: 16px; padding: 15px 18px; box-shadow: 0 4px 18px rgba(18,55,67,.04);}
-      [data-testid="stMetricLabel"] {color: #5a7179;}
-      [data-testid="stMetricValue"] {color: #173743;}
+      .stats-grid {display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .8rem; margin-bottom: 1.5rem;}
+      .stat-card {background: #fff; border: 1px solid #e1e9eb; border-radius: 15px; padding: .9rem 1.1rem; box-shadow: 0 4px 18px rgba(18,55,67,.04);}
+      .stat-card span {display: block; color: #5a7179; font-size: .8rem; margin-bottom: .24rem;}
+      .stat-card strong {display: block; color: #173743; font-size: 1.3rem; font-weight: 720; line-height: 1.2; overflow-wrap: anywhere;}
       [data-testid="stDataFrame"], [data-testid="stFileUploader"] {border-radius: 14px; overflow: hidden;}
       button[kind="primary"] {border-radius: 10px; font-weight: 650;}
       [data-baseweb="tab-list"] {gap: .35rem; border-bottom: 1px solid #dce6e8;}
@@ -61,7 +62,8 @@ st.markdown(
       .insight-title {color: #153743; font-size: 1.2rem; font-weight: 750; line-height: 1.3; margin: .45rem 0 .35rem; overflow-wrap: anywhere;}
       .insight-card p {color: #4f6971; font-size: .89rem; line-height: 1.5; margin: 0;}
       .section-lead {color: #5b737a; font-size: .93rem; margin: -.35rem 0 .75rem;}
-      @media (max-width: 700px) {.block-container {padding-top: 4.5rem; padding-left: 1rem; padding-right: 1rem;} .hero {padding: 1.45rem; min-height: 128px;} .hero-subtitle {font-size: .88rem;} .wave-mark {display: none;} .insight-card {min-height: 0;}}
+      @media (max-width: 700px) {.block-container {padding-top: 4.5rem; padding-left: 1rem; padding-right: 1rem;} .hero {padding: 1.45rem; min-height: 128px;} .hero-subtitle {font-size: .88rem;} .wave-mark {display: none;} .insight-card {min-height: 0;} .stat-card {padding: .75rem;} .stat-card strong {font-size: 1.05rem;}}
+      @media (max-width: 390px) {.stats-grid {grid-template-columns: repeat(2,minmax(0,1fr));} .stat-card:last-child {grid-column: span 2;}}
     </style>
     <div class="hero"><div class="hero-copy"><div class="hero-title">Audio Noise Lab</div><div class="hero-subtitle">Clean, compare, and export audio.</div></div><div class="wave-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
     """,
@@ -213,10 +215,13 @@ st.markdown(
     f'<div class="source-card"><div class="source-icon" aria-hidden="true">♫</div><div><span>Current recording</span><strong>{escape(data.name)}</strong></div></div>',
     unsafe_allow_html=True,
 )
-col1, col2, col3 = st.columns(3)
-col1.metric("Duration", f"{data.duration:.2f} s")
-col2.metric("Sample rate", f"{data.sample_rate:,} Hz")
-col3.metric("Channels", "Mono" if data.samples.shape[1] == 1 else "Stereo")
+channels = "Mono" if data.samples.shape[1] == 1 else "Stereo"
+st.markdown(
+    f'<div class="stats-grid"><div class="stat-card"><span>Duration</span><strong>{data.duration:.2f} s</strong></div>'
+    f'<div class="stat-card"><span>Sample rate</span><strong>{data.sample_rate:,} Hz</strong></div>'
+    f'<div class="stat-card"><span>Channels</span><strong>{channels}</strong></div></div>',
+    unsafe_allow_html=True,
+)
 
 pattern, match = predict_pattern(data, get_ai_bank())
 st.subheader("Processing insights")
