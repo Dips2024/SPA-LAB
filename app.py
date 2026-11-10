@@ -140,7 +140,12 @@ def spectrogram_figure(original: np.ndarray, cleaned: np.ndarray, fs: int) -> pl
 
 
 def summary_table(rows: list[dict]) -> None:
-    st.dataframe(rows, width="stretch", hide_index=True)
+    number_columns = {
+        key: st.column_config.NumberColumn(key, format="%.7f" if key == "MSE" else "%.2f")
+        for key in rows[0]
+        if key != "Method"
+    }
+    st.dataframe(rows, column_config=number_columns, width="stretch", hide_index=True)
 
 
 @st.cache_resource
